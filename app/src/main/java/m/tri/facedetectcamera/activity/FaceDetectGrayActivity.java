@@ -29,6 +29,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -595,6 +596,7 @@ public final class FaceDetectGrayActivity extends AppCompatActivity implements S
             fdet = new android.media.FaceDetector(bmp.getWidth(), bmp.getHeight(), MAX_FACE);
 
             android.media.FaceDetector.Face[] fullResults = new android.media.FaceDetector.Face[MAX_FACE];
+            faceLooking = new boolean[MAX_FACE];
             fdet.findFaces(bmp, fullResults);
 
             for (int i = 0; i < MAX_FACE; i++) {

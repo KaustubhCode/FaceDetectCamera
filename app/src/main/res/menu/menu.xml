@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/faces"
-        android:title="No of faces" />
+    android:title="No of faces" /> />
     <item android:id="@+id/distance"
         android:title="Distance From Each Face"/>
     <item android:id="@+id/about"
