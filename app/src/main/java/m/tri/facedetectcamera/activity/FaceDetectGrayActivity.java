@@ -600,6 +600,9 @@ public final class FaceDetectGrayActivity extends AppCompatActivity implements S
                     float pose = fullResults[i].pose(android.media.FaceDetector.Face.EULER_Y);
                     int idFace = Id;
 
+                    if (abs(pose) < 20){
+                        faceLooking[i] = true;
+                    }
                     Rect rect = new Rect(
                             (int) (mid.x - eyesDis * 1.20f),
                             (int) (mid.y - eyesDis * 0.55f),
