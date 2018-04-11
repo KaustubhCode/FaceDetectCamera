@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">FaceDetectCamera</string>
+    <string name="capture">Capture</string>
+    <string name="stop">Stop</string>
 </resources>
