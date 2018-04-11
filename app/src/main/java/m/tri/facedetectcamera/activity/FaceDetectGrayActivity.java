@@ -12,6 +12,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -76,6 +78,9 @@ public final class FaceDetectGrayActivity extends AppCompatActivity implements S
     private int previewWidth;
     private int previewHeight;
 
+    private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle mToggle;
+
     // The surface view for the camera data
     private SurfaceView mView;
 
@@ -132,6 +137,13 @@ public final class FaceDetectGrayActivity extends AppCompatActivity implements S
 
         mView = (SurfaceView) findViewById(R.id.surfaceview);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
+        mDrawerLayout.addDrawerListener(mToggle);
+        mToggle.syncState();
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         captureButton = (Button) findViewById(R.id.capture);
         stopButton = (Button) findViewById(R.id.stop) ;
