@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="No of Faces"
-        android:title="@string/no_of_faces"/>
-    <item android:id="Distance From Each Face"
+    <item android:id="@+id/faces"
+        android:title="@string/faces"/>
+    <item android:id="@+id/distance"
         android:title="@string/distance"/>
-    <item android:id="About The App"
+    <item android:id="@+id/about"
         android:title="@string/about"/>
-
-
 </menu>
