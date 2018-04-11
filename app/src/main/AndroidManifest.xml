@@ -28,12 +28,6 @@
             android:name=".activity.FaceDetectGrayActivity"
             android:screenOrientation="fullSensor" />
 
-        <activity
-            android:name=".activity.FaceDetectRGBActivity"
-            android:screenOrientation="fullSensor" />
-
-        <activity
-            android:name=".activity.PhotoDetectActivity" />
     </application>
 
 </manifest>

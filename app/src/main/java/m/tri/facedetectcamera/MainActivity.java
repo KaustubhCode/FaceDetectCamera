@@ -12,8 +12,6 @@ import android.view.View;
 import android.widget.Button;
 
 import m.tri.facedetectcamera.activity.FaceDetectGrayActivity;
-import m.tri.facedetectcamera.activity.FaceDetectRGBActivity;
-import m.tri.facedetectcamera.activity.PhotoDetectActivity;
 
 /**
  * Created by Nguyen on 5/20/2016.
@@ -34,20 +32,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mContext = this;
 
-        Button btnCameraRGB = (Button) findViewById(R.id.btnRGB);
-        btnCameraRGB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int rc = ActivityCompat.checkSelfPermission(mContext, Manifest.permission.CAMERA);
-                if (rc == PackageManager.PERMISSION_GRANTED) {
-                    Intent intent = new Intent(mContext, FaceDetectRGBActivity.class);
-                    startActivity(intent);
-                } else {
-                    requestCameraPermission(RC_HANDLE_CAMERA_PERM_RGB);
-                }
-            }
-        });
-
         Button btnCameraGray = (Button) findViewById(R.id.btnGray);
         btnCameraGray.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,15 +43,6 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     requestCameraPermission(RC_HANDLE_CAMERA_PERM_GRAY);
                 }
-            }
-        });
-
-        Button btnPhoto = (Button) findViewById(R.id.btnImage);
-        btnPhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, PhotoDetectActivity.class);
-                startActivity(intent);
             }
         });
     }
@@ -83,12 +58,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-
-        if (grantResults.length != 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED && requestCode == RC_HANDLE_CAMERA_PERM_RGB) {
-            Intent intent = new Intent(mContext, FaceDetectRGBActivity.class);
-            startActivity(intent);
-            return;
-        }
 
         if (grantResults.length != 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED && requestCode == RC_HANDLE_CAMERA_PERM_GRAY) {
             Intent intent = new Intent(mContext, FaceDetectGrayActivity.class);
