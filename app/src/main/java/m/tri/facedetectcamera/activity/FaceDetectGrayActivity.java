@@ -48,6 +48,7 @@ import m.tri.facedetectcamera.utils.ImageUtils;
 import m.tri.facedetectcamera.utils.Util;
 
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
+import static java.lang.Math.abs;
 
 
 /**
@@ -104,6 +105,7 @@ public final class FaceDetectGrayActivity extends AppCompatActivity implements S
 
     private FaceResult faces[];
     private FaceResult faces_previous[];
+    private boolean[] faceLooking;
     private int Id = 0;
 
     private String BUNDLE_CAMERA_ID = "camera";
@@ -116,6 +118,9 @@ public final class FaceDetectGrayActivity extends AppCompatActivity implements S
     private ArrayList<Bitmap> facesBitmap;
 
     private Context mContext;
+    private int delay = 3000; //milliseconds
+
+
 
     //==============================================================================================
     // Activity Methods
@@ -678,6 +683,16 @@ public final class FaceDetectGrayActivity extends AppCompatActivity implements S
                     isThreadWorking = false;
                 }
             });
+
+            handler.postDelayed(new Runnable(){
+                public void run(){
+                    //do something
+                    if (facesBitmap != null) {
+                        Log.d(TAG, "OpenCV code");
+                    }
+                    handler.postDelayed(this, delay);
+                }
+            }, delay);
         }
 
         private void gray8toRGB32(byte[] gray8, int width, int height, int[] rgb_32s) {
