@@ -146,7 +146,7 @@ public final class FaceDetectGrayActivity extends AppCompatActivity implements S
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         captureButton = (Button) findViewById(R.id.capture);
-        stopButton = (Button) findViewById(R.id.stop) ;
+        stopButton = (Button) findViewById(R.id.stop);
 
         mContext = this;
 
@@ -161,7 +161,8 @@ public final class FaceDetectGrayActivity extends AppCompatActivity implements S
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, MainActivity.class);
-                startActivity(intent);            }
+                startActivity(intent);
+            }
         });
 
         // Now create the OverlayView:
@@ -199,7 +200,7 @@ public final class FaceDetectGrayActivity extends AppCompatActivity implements S
         public void onPictureTaken(byte[] data, Camera camera) {
 
             File pictureFile = getOutputMediaFile(MEDIA_TYPE_IMAGE);
-            if (pictureFile == null){
+            if (pictureFile == null) {
                 Log.d(TAG, "Error creating media file, check storage permissions: ");
                 return;
             }
@@ -219,13 +220,17 @@ public final class FaceDetectGrayActivity extends AppCompatActivity implements S
     public static final int MEDIA_TYPE_IMAGE = 1;
     public static final int MEDIA_TYPE_VIDEO = 2;
 
-    /** Create a file Uri for saving an image or video */
-    private static Uri getOutputMediaFileUri(int type){
+    /**
+     * Create a file Uri for saving an image or video
+     */
+    private static Uri getOutputMediaFileUri(int type) {
         return Uri.fromFile(getOutputMediaFile(type));
     }
 
-    /** Create a File for saving an image or video */
-    private static File getOutputMediaFile(int type){
+    /**
+     * Create a File for saving an image or video
+     */
+    private static File getOutputMediaFile(int type) {
         // To be safe, you should check that the SDCard is mounted
         // using Environment.getExternalStorageState() before doing this.
 
@@ -235,8 +240,8 @@ public final class FaceDetectGrayActivity extends AppCompatActivity implements S
         // between applications and persist after your app has been uninstalled.
 
         // Create the storage directory if it does not exist
-        if (! mediaStorageDir.exists()){
-            if (! mediaStorageDir.mkdirs()){
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
                 Log.d("GazeDetector", "failed to create directory");
                 return null;
             }
@@ -245,12 +250,12 @@ public final class FaceDetectGrayActivity extends AppCompatActivity implements S
         // Create a media file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         File mediaFile;
-        if (type == MEDIA_TYPE_IMAGE){
+        if (type == MEDIA_TYPE_IMAGE) {
             mediaFile = new File(mediaStorageDir.getPath() + File.separator +
-                    "IMG_"+ timeStamp + ".jpg");
-        } else if(type == MEDIA_TYPE_VIDEO) {
+                    "IMG_" + timeStamp + ".jpg");
+        } else if (type == MEDIA_TYPE_VIDEO) {
             mediaFile = new File(mediaStorageDir.getPath() + File.separator +
-                    "VID_"+ timeStamp + ".mp4");
+                    "VID_" + timeStamp + ".mp4");
         } else {
             return null;
         }
@@ -616,7 +621,7 @@ public final class FaceDetectGrayActivity extends AppCompatActivity implements S
                     /**
                      * Only detect face size > 100x100
                      */
-                    if(rect.height() * rect.width() > 100 * 100) {
+                    if (rect.height() * rect.width() > 100 * 100) {
                         // Check this face and previous face have same ID?
                         for (int j = 0; j < MAX_FACE; j++) {
                             float eyesDisPre = faces_previous[j].eyesDistance();
