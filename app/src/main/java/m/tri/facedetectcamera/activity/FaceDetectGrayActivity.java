@@ -12,8 +12,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -28,7 +26,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
-
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -51,7 +48,6 @@ import m.tri.facedetectcamera.utils.ImageUtils;
 import m.tri.facedetectcamera.utils.Util;
 
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
-import static java.lang.Math.abs;
 
 
 /**
@@ -79,9 +75,6 @@ public final class FaceDetectGrayActivity extends AppCompatActivity implements S
 
     private int previewWidth;
     private int previewHeight;
-
-    private DrawerLayout mDrawerLayout;
-    private ActionBarDrawerToggle mToggle;
 
     // The surface view for the camera data
     private SurfaceView mView;
@@ -111,7 +104,6 @@ public final class FaceDetectGrayActivity extends AppCompatActivity implements S
 
     private FaceResult faces[];
     private FaceResult faces_previous[];
-    private boolean[] faceLooking;
     private int Id = 0;
 
     private String BUNDLE_CAMERA_ID = "camera";
@@ -124,9 +116,6 @@ public final class FaceDetectGrayActivity extends AppCompatActivity implements S
     private ArrayList<Bitmap> facesBitmap;
 
     private Context mContext;
-    private int delay = 3000; //milliseconds
-
-
 
     //==============================================================================================
     // Activity Methods
@@ -144,15 +133,8 @@ public final class FaceDetectGrayActivity extends AppCompatActivity implements S
         mView = (SurfaceView) findViewById(R.id.surfaceview);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
-        mDrawerLayout.addDrawerListener(mToggle);
-        mToggle.syncState();
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         captureButton = (Button) findViewById(R.id.capture);
-        stopButton = (Button) findViewById(R.id.stop) ;
+        stopButton = (Button) findViewById(R.id.stop);
 
         mContext = this;
 
@@ -167,7 +149,8 @@ public final class FaceDetectGrayActivity extends AppCompatActivity implements S
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, MainActivity.class);
-                startActivity(intent);            }
+                startActivity(intent);
+            }
         });
 
         // Now create the OverlayView:
@@ -205,7 +188,7 @@ public final class FaceDetectGrayActivity extends AppCompatActivity implements S
         public void onPictureTaken(byte[] data, Camera camera) {
 
             File pictureFile = getOutputMediaFile(MEDIA_TYPE_IMAGE);
-            if (pictureFile == null){
+            if (pictureFile == null) {
                 Log.d(TAG, "Error creating media file, check storage permissions: ");
                 return;
             }
@@ -225,13 +208,17 @@ public final class FaceDetectGrayActivity extends AppCompatActivity implements S
     public static final int MEDIA_TYPE_IMAGE = 1;
     public static final int MEDIA_TYPE_VIDEO = 2;
 
-    /** Create a file Uri for saving an image or video */
-    private static Uri getOutputMediaFileUri(int type){
+    /**
+     * Create a file Uri for saving an image or video
+     */
+    private static Uri getOutputMediaFileUri(int type) {
         return Uri.fromFile(getOutputMediaFile(type));
     }
 
-    /** Create a File for saving an image or video */
-    private static File getOutputMediaFile(int type){
+    /**
+     * Create a File for saving an image or video
+     */
+    private static File getOutputMediaFile(int type) {
         // To be safe, you should check that the SDCard is mounted
         // using Environment.getExternalStorageState() before doing this.
 
@@ -241,8 +228,8 @@ public final class FaceDetectGrayActivity extends AppCompatActivity implements S
         // between applications and persist after your app has been uninstalled.
 
         // Create the storage directory if it does not exist
-        if (! mediaStorageDir.exists()){
-            if (! mediaStorageDir.mkdirs()){
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
                 Log.d("GazeDetector", "failed to create directory");
                 return null;
             }
@@ -251,12 +238,12 @@ public final class FaceDetectGrayActivity extends AppCompatActivity implements S
         // Create a media file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         File mediaFile;
-        if (type == MEDIA_TYPE_IMAGE){
+        if (type == MEDIA_TYPE_IMAGE) {
             mediaFile = new File(mediaStorageDir.getPath() + File.separator +
-                    "IMG_"+ timeStamp + ".jpg");
-        } else if(type == MEDIA_TYPE_VIDEO) {
+                    "IMG_" + timeStamp + ".jpg");
+        } else if (type == MEDIA_TYPE_VIDEO) {
             mediaFile = new File(mediaStorageDir.getPath() + File.separator +
-                    "VID_"+ timeStamp + ".mp4");
+                    "VID_" + timeStamp + ".mp4");
         } else {
             return null;
         }
@@ -596,7 +583,6 @@ public final class FaceDetectGrayActivity extends AppCompatActivity implements S
             fdet = new android.media.FaceDetector(bmp.getWidth(), bmp.getHeight(), MAX_FACE);
 
             android.media.FaceDetector.Face[] fullResults = new android.media.FaceDetector.Face[MAX_FACE];
-            faceLooking = new boolean[MAX_FACE];
             fdet.findFaces(bmp, fullResults);
 
             for (int i = 0; i < MAX_FACE; i++) {
@@ -614,9 +600,12 @@ public final class FaceDetectGrayActivity extends AppCompatActivity implements S
                     float pose = fullResults[i].pose(android.media.FaceDetector.Face.EULER_Y);
                     int idFace = Id;
 
+<<<<<<< HEAD
 //                    if (abs(pose) < 20){
 //                        faceLooking[i] = true;
 //                    }
+=======
+>>>>>>> 13718521a3b203776d6ec2d2fde4e7ada48f2718
                     Rect rect = new Rect(
                             (int) (mid.x - eyesDis * 1.20f),
                             (int) (mid.y - eyesDis * 0.55f),
@@ -626,7 +615,7 @@ public final class FaceDetectGrayActivity extends AppCompatActivity implements S
                     /**
                      * Only detect face size > 100x100
                      */
-                    if(rect.height() * rect.width() > 100 * 100) {
+                    if (rect.height() * rect.width() > 100 * 100) {
                         // Check this face and previous face have same ID?
                         for (int j = 0; j < MAX_FACE; j++) {
                             float eyesDisPre = faces_previous[j].eyesDistance();
@@ -700,6 +689,7 @@ public final class FaceDetectGrayActivity extends AppCompatActivity implements S
                     isThreadWorking = false;
                 }
             });
+<<<<<<< HEAD
 
 //            handler.postDelayed(new Runnable(){
 //                public void run(){
@@ -710,6 +700,8 @@ public final class FaceDetectGrayActivity extends AppCompatActivity implements S
 //                    handler.postDelayed(this, delay);
 //                }
 //            }, delay);
+=======
+>>>>>>> 13718521a3b203776d6ec2d2fde4e7ada48f2718
         }
 
         private void gray8toRGB32(byte[] gray8, int width, int height, int[] rgb_32s) {

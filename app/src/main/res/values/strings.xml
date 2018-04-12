@@ -2,10 +2,4 @@
     <string name="app_name">FaceDetectCamera</string>
     <string name="capture">Capture</string>
     <string name="stop">Stop</string>
-    <string name="no_of_faces">no_of_faces</string>
-    <string name="distance">distance</string>
-    <string name="about">about</string>
-    <string name="faces">faces</string>
-    <string name="open">open</string>
-    <string name="close" />
 </resources>
