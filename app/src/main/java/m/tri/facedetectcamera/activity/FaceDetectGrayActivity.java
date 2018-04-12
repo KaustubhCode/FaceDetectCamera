@@ -104,6 +104,7 @@ public final class FaceDetectGrayActivity extends AppCompatActivity implements S
 
     private FaceResult faces[];
     private FaceResult faces_previous[];
+    private boolean faceLooking[];
     private int Id = 0;
 
     private String BUNDLE_CAMERA_ID = "camera";
@@ -116,6 +117,7 @@ public final class FaceDetectGrayActivity extends AppCompatActivity implements S
     private ArrayList<Bitmap> facesBitmap;
 
     private Context mContext;
+    private int noOfFaces = 0;
 
     //==============================================================================================
     // Activity Methods
@@ -583,7 +585,8 @@ public final class FaceDetectGrayActivity extends AppCompatActivity implements S
             fdet = new android.media.FaceDetector(bmp.getWidth(), bmp.getHeight(), MAX_FACE);
 
             android.media.FaceDetector.Face[] fullResults = new android.media.FaceDetector.Face[MAX_FACE];
-            fdet.findFaces(bmp, fullResults);
+            noOfFaces = fdet.findFaces(bmp, fullResults);
+            faceLooking = new boolean[noOfFaces];
 
             for (int i = 0; i < MAX_FACE; i++) {
                 if (fullResults[i] == null) {
@@ -600,6 +603,7 @@ public final class FaceDetectGrayActivity extends AppCompatActivity implements S
                     float pose = fullResults[i].pose(android.media.FaceDetector.Face.EULER_Y);
                     int idFace = Id;
 
+                    Log.d(TAG, "Pose of person is " + pose);
 //                    if (abs(pose) < 20){
 //                        faceLooking[i] = true;
 //                    }
@@ -613,7 +617,7 @@ public final class FaceDetectGrayActivity extends AppCompatActivity implements S
                     /**
                      * Only detect face size > 100x100
                      */
-                    if (rect.height() * rect.width() > 100 * 100) {
+                    if (rect.height() * rect.width() > 75 * 75) {
                         // Check this face and previous face have same ID?
                         for (int j = 0; j < MAX_FACE; j++) {
                             float eyesDisPre = faces_previous[j].eyesDistance();

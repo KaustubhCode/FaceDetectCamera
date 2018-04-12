@@ -121,6 +121,7 @@ public class FaceOverlayView extends View {
                     canvas.drawText("ID " + face.getId(), rectF.left, rectF.bottom + mTextPaint.getTextSize(), mTextPaint);
                     canvas.drawText("Confidence " + face.getConfidence(), rectF.left, rectF.bottom + mTextPaint.getTextSize() * 2, mTextPaint);
                     canvas.drawText("EyesDistance " + face.eyesDistance(), rectF.left, rectF.bottom + mTextPaint.getTextSize() * 3, mTextPaint);
+                    canvas.drawText("Looking " + face.getLooking(), rectF.left, rectF.bottom + mTextPaint.getTextSize() * 4, mTextPaint);
                 }
             }
             canvas.restore();

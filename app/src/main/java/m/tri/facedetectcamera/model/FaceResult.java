@@ -2,6 +2,8 @@ package m.tri.facedetectcamera.model;
 
 import android.graphics.PointF;
 
+import static java.lang.Math.abs;
+
 /**
  * Created by Nguyen on 5/20/2016.
  */
@@ -14,6 +16,7 @@ public class FaceResult extends Object {
     private float pose;
     private int id;
     private long time;
+    private boolean looking = false;
 
     public FaceResult() {
         id = 0;
@@ -40,6 +43,12 @@ public class FaceResult extends Object {
         this.confidence = confidence;
         this.pose = pose;
         this.time = time;
+        if (abs(this.pose) < 20) {
+            this.looking = true;
+        }
+        else{
+            this.looking = false;
+        }
     }
 
     public float eyesDistance() {
@@ -92,5 +101,9 @@ public class FaceResult extends Object {
 
     public void setTime(long time) {
         this.time = time;
+    }
+
+    public boolean getLooking() {
+        return this.looking;
     }
 }
