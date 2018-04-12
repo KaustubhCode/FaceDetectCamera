@@ -614,9 +614,9 @@ public final class FaceDetectGrayActivity extends AppCompatActivity implements S
                     float pose = fullResults[i].pose(android.media.FaceDetector.Face.EULER_Y);
                     int idFace = Id;
 
-                    if (abs(pose) < 20){
-                        faceLooking[i] = true;
-                    }
+//                    if (abs(pose) < 20){
+//                        faceLooking[i] = true;
+//                    }
                     Rect rect = new Rect(
                             (int) (mid.x - eyesDis * 1.20f),
                             (int) (mid.y - eyesDis * 0.55f),
@@ -701,15 +701,15 @@ public final class FaceDetectGrayActivity extends AppCompatActivity implements S
                 }
             });
 
-            handler.postDelayed(new Runnable(){
-                public void run(){
-                    //do something
-                    if (facesBitmap != null) {
-                        Log.d(TAG, "OpenCV code");
-                    }
-                    handler.postDelayed(this, delay);
-                }
-            }, delay);
+//            handler.postDelayed(new Runnable(){
+//                public void run(){
+//                    //do something
+//                    if (facesBitmap != null) {
+//                        Log.d(TAG, "OpenCV code");
+//                    }
+//                    handler.postDelayed(this, delay);
+//                }
+//            }, delay);
         }
 
         private void gray8toRGB32(byte[] gray8, int width, int height, int[] rgb_32s) {
