@@ -600,12 +600,10 @@ public final class FaceDetectGrayActivity extends AppCompatActivity implements S
                     float pose = fullResults[i].pose(android.media.FaceDetector.Face.EULER_Y);
                     int idFace = Id;
 
-<<<<<<< HEAD
 //                    if (abs(pose) < 20){
 //                        faceLooking[i] = true;
 //                    }
-=======
->>>>>>> 13718521a3b203776d6ec2d2fde4e7ada48f2718
+
                     Rect rect = new Rect(
                             (int) (mid.x - eyesDis * 1.20f),
                             (int) (mid.y - eyesDis * 0.55f),
@@ -689,7 +687,6 @@ public final class FaceDetectGrayActivity extends AppCompatActivity implements S
                     isThreadWorking = false;
                 }
             });
-<<<<<<< HEAD
 
 //            handler.postDelayed(new Runnable(){
 //                public void run(){
@@ -700,8 +697,6 @@ public final class FaceDetectGrayActivity extends AppCompatActivity implements S
 //                    handler.postDelayed(this, delay);
 //                }
 //            }, delay);
-=======
->>>>>>> 13718521a3b203776d6ec2d2fde4e7ada48f2718
         }
 
         private void gray8toRGB32(byte[] gray8, int width, int height, int[] rgb_32s) {
